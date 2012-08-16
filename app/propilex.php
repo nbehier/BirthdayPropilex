@@ -83,18 +83,7 @@ $app->mount('/users', new Propilex\Provider\RestController(
  * Get users activities
  */
 $app->get('/activities', function() use ($app) {
-    $activities = array(
-    	array(
-    		'date' => '2012-08-16 07:12:02',
-    		'message' => 'Update User with id 3', 
-            'type' => 'user_update'
-        ), 
-        array(
-            'date' => '2012-08-16 07:14:02', 
-            'message' => 'Update User with id 2',
-    		'type' => 'user_update'
-    	),
-    );
+    $activities = Propilex\LogReader::getActivities($app);
     return $app['twig']->render('activities.html.twig', array('activities' => $activities) );
 });
 

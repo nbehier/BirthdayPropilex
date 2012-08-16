@@ -6,7 +6,7 @@
         <h2>Suivi de l'application</h2>
         <ul id="activities">
         {% for activity in activities %}
-        <li class="{{ activity.type }}"><span class="date">{{ activity.date }}</span> {{ activity.message }}</li>
+        <li class="{{ activity.type }}"><span class="date">{{ activity.date | date('d/m/y, h:i') }}</span> {{ activity.message }}</li>
         {% endfor %}
         </ul>
     </section>

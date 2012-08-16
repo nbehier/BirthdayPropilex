@@ -1,6 +1,7 @@
 @zindexInformation: 100;
 @labelWidth: 6em;
 @errorFontSize: 0.8em;
+@textColor: #333;
 
 .rounded-corners (@radius: 4px) {
 	border-radius: @radius;
@@ -58,6 +59,8 @@ nav a:hover img { .opacity(1); }
 	@border-color: #ccc;
 	border-top:1px solid @border-color; padding-left:0; 
 	li {
-		border-bottom:1px solid @border-color;
-		.date {  }
+		background-position:110px 5px; background-repeat:no-repeat; border-bottom:1px solid @border-color; font-size:0.8em; list-style:none; padding:0 4px;
+		&.updateuserinformation { background-image:url(../img/user_silhouette.png); }
+		.date { color:lighten(@textColor, 40%); margin-right:3em; }
+	}
 }
