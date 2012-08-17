@@ -14,6 +14,8 @@
 {% endblock %}
 
 {% block javascript %}
+<script src="{{ app.request.basepath }}/js/libs/razorfish-slider/slider.js"></script>
+
 <script src="{{ app.request.basepath }}/application.js"></script>
 <script src="{{ app.request.basepath }}/models/user.js"></script>
 <script src="{{ app.request.basepath }}/collections/users.js"></script>
@@ -76,6 +78,18 @@
 	<div class="formElement">
 	<label for="Description">Description</label>
 	<textarea name="Description"><%= Description %></textarea>
+	</div>
+	<div class="formElement">
+	<label for="Meal">Repas</label>
+	<select id="Meal" name="Meal" multiple="multiple">
+		<option value="212">Vendredi soir</option>
+		<option value="013">Samedi matin</option>
+		<option value="113">Samedi midi</option>
+		<option value="213">Samedi soir</option>
+		<option value="014">Dimanche matin</option>
+		<option value="114">Dimanche midi</option>
+		<option value="214">Dimanche soir</option>
+	</select>
 	</div>
 	<div class="actions"><input type="submit" value="Sauvegarder"><a href="#users/<%= Id %>/show" class="action undo">Annuler</a><img src="{{ app.request.basepath }}/img/ajax-loader.gif" alt="Indicateur requête en cours" style="display:none" id="userEditAjaxIndicator"/></div>
 	</form>

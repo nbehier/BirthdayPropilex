@@ -39,6 +39,8 @@ App.Views.ShowUser = Backbone.View.extend({
 		  this.displayErrors();
 	  }
 	  
+	  this.updateFormElements();
+	  
 	  return this;
   },
   
@@ -112,5 +114,28 @@ App.Views.ShowUser = Backbone.View.extend({
   removeErrors: function() {
 	  this.$('form .errorMessage').remove();
 	  this.$('form .error').removeClass('error');
-  }
+  },
+  
+  updateFormElements: function(){
+		var selectMeal = this.$('select#Meal');
+
+		if (selectMeal.length > 0 ) {
+			
+			selectMeal.hide();
+			var tabsMeal = _.map(selectMeal.children(), function(option) { 
+				return { 'text' : $(option).text(), 'val' : $(option).val() };
+			});
+	        
+			// create the slider
+			( new Razorfish.Slider( {
+				width: 200,
+				handleWidth: 12,
+				useRange: true,
+				tabs : tabsMeal
+			} ) )
+			.prependTo( selectMeal.parent() )
+			//.bind     ( 'range', changeRange )
+			.setRange ( 2, 4 );
+		}
+	}
 });

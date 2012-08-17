@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../slider.js"></script>
+
+	<script>
+	$( function(){
+		// create the slider
+		( new Razorfish.Slider( {
+			        width : 500
+			, handleWidth : 12
+			,    useRange : true
+			,        tabs : [
+				  { text : 'Jan', date : new Date( '2012-01-01' ) }
+				, { text : 'Feb', date : new Date( '2012-02-01' ) }
+				, { text : 'Mar', date : new Date( '2012-03-01' ) }
+				, { text : 'Apr', date : new Date( '2012-04-01' ) }
+				, { text : 'May', date : new Date( '2012-05-01' ) }
+				, { text : 'Jun', date : new Date( '2012-06-01' ) }
+				, { text : 'Jul', date : new Date( '2012-07-01' ) }
+				, { text : 'Aug', date : new Date( '2012-08-01' ) }
+				, { text : 'Sep', date : new Date( '2012-09-01' ) }
+				, { text : 'Oct', date : new Date( '2012-10-01' ) }
+				, { text : 'Nov', date : new Date( '2012-11-01' ) }
+				, { text : 'Dec', date : new Date( '2012-12-01' ) }
+			]
+		} ) )
+			.prependTo( document.body )
+			.bind     ( 'range', changeRange )
+			.setRange ( 0, 11 );
+	} );
+
+	function changeRange( ev, min, max ){
+		$( '#status' ).text( min + ' -- ' + max )
+	}
+	</script>
+
+	<link href="css/slider.css"  rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="status" style="padding-top: 50px;"></div>
+</body>
+</html>
