@@ -122,20 +122,39 @@ App.Views.ShowUser = Backbone.View.extend({
 		if (selectMeal.length > 0 ) {
 			
 			selectMeal.hide();
+			_.each(selectMeal.children(), function(option, idx) { 
+				$(option).attr('rel', idx + 0.5);
+			});
+			
 			var tabsMeal = _.map(selectMeal.children(), function(option) { 
-				return { 'text' : $(option).text(), 'val' : $(option).val() };
+				return { 'text' : $(option).text(), 'data' : $(option).val() };
 			});
 	        
 			// create the slider
 			( new Razorfish.Slider( {
-				width: 200,
+				width: 300,
 				handleWidth: 12,
 				useRange: true,
-				tabs : tabsMeal
+				tabs: tabsMeal,
+				tabsRelative: -20
 			} ) )
-			.prependTo( selectMeal.parent() )
-			//.bind     ( 'range', changeRange )
+			.appendTo( selectMeal.parent() )
+			.bind     ( 'range', this.changeRange )
 			.setRange ( 2, 4 );
 		}
+	},
+	
+	changeRange: function(evt, min, max) {
+		var selectMeal = $('select#Meal');
+
+		_.each(selectMeal.children(), function(option) {
+			var option = $(option);
+			if (option.attr('rel') >= min && option.attr('rel') <= max) {
+				option.attr('selected', 'selected');
+			}
+			else {
+				option.removeAttr('selected');
+			}
+		});
 	}
 });
