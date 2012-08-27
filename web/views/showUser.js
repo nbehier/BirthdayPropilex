@@ -120,6 +120,8 @@ App.Views.ShowUser = Backbone.View.extend({
 		var selectMeal = this.$('select#Meal');
 
 		if (selectMeal.length > 0 ) {
+			var mealsMinRange = this.model.getMealsBegin();
+			var mealsMaxRange = this.model.getMealsEnd();
 			
 			selectMeal.hide();
 			_.each(selectMeal.children(), function(option, idx) { 
@@ -140,7 +142,7 @@ App.Views.ShowUser = Backbone.View.extend({
 			} ) )
 			.appendTo( selectMeal.parent() )
 			.bind     ( 'range', this.changeRange )
-			.setRange ( 2, 4 );
+			.setRange (mealsMinRange, mealsMaxRange );
 		}
 	},
 	

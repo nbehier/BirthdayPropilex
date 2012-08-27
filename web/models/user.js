@@ -76,6 +76,23 @@ var User = Backbone.Model.extend({
   
   getAllErrorMessage: function(){
 	  return this.get('errorMessages');
+  },
+  
+  getMealsBegin: function() {
+	  var meals = this.get('Meal');
+	  if (meals != undefined && meals.length > 0) {
+		  var firstMeal = _.first(meals);
+		  return ((firstMeal['Meal.Date'].substr(-2,2) - 12) * 3) + (firstMeal['Meal.Type'] * 1) - 1;
+	  }
+	  return 2;
+  },
+  
+  getMealsEnd: function() {
+	  var meals = this.get('Meal');
+	  if (meals != undefined && meals.length > 0) {
+		  return this.getMealsBegin() + meals.length;
+	  }
+	  return 4;
   }
   
 
