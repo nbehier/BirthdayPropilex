@@ -75,7 +75,7 @@ $app->get('/private', function() use ($app) {
 /**
  * Register a REST controller to manage documents
  */
-$app->mount('/users', new Propilex\Provider\RestController(
+$app->mount('/users', new Propilex\Provider\UserController(
 	'user', '\Propilex\Model\User', 'getUpdatedAt'
 ));
 

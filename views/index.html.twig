@@ -81,7 +81,7 @@
 	</div>
 	<div class="formElement" style="height:4em; overflow:hidden;">
 	<label for="Meal">Repas</label>
-	<select id="Meal" name="Meal" multiple="multiple">
+	<select id="Meal" name="Meal[]" multiple="multiple">
 		<option value="212">Ven soir</option>
 		<option value="013">Sam matin</option>
 		<option value="113">Sam midi</option>
@@ -91,6 +91,7 @@
 		<option value="214">Dim soir</option>
 	</select>
 	</div>
+	<div class="formElement"><label for="Number">Personne(s)</label><input type="text" name="Number" value="<%= Number %>"/></div>
 	<div class="actions"><input type="submit" value="Sauvegarder"><a href="#users/<%= Id %>/show" class="action undo">Annuler</a><img src="{{ app.request.basepath }}/img/ajax-loader.gif" alt="Indicateur requête en cours" style="display:none" id="userEditAjaxIndicator"/></div>
 	</form>
 </div>

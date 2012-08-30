@@ -64,7 +64,7 @@ App.Views.ShowUser = Backbone.View.extend({
 	  var valuesArray = this.$('form').serializeArray();
 	  
 	  this.model.removeAllErrorMessage();
-
+	  
 	  _.each(valuesArray, function(element, index, list){
 		  var errorMessage = this.model.preValidate(element.name, element.value);
 		  if (errorMessage != '') {

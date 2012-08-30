@@ -4,6 +4,7 @@ namespace Propilex\Model;
 
 use Propilex\Model\om\BaseUser;
 use \PropelException;
+use \Criteria;
 
 
 /**
@@ -69,5 +70,35 @@ class User extends BaseUser
             throw new PropelException('Unknown stored enum key: ' . $v);
         }
         return $valueSet[$v];
+    }
+    
+    /**
+     * Add Meal Reference by type and date
+     * Forseeing enhancement
+     * @param array (type and day keys)
+     */
+    public function addMealByTypeAndDate($mealsRef, $number)
+    {
+        $meals = MealPeer::doSelect(new Criteria() );
+        foreach ($meals as $meal) {
+            foreach ($mealsRef as $mealRef) {
+                if (Meal::getTypeIndex($meal->getType() ) == $mealRef['type'] 
+                	&& $meal->getDayDate() == $mealRef['day']) {
+                    $usermeal = new Usermeal();
+                    $usermeal->setUserId($this->getId() );
+                    $usermeal->setMealId($meal->getId() );
+                    $usermeal->setNumber($number);
+                    $usermeal->save();
+                }
+            }
+        }
+    }
+    
+    /**
+     * Delete all Meals References
+     */
+    public function deleteMeals()
+    {
+        UserQuery::deleteMeals($this->getId() );
     }
 }

@@ -14,11 +14,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RestController implements ControllerProviderInterface
 {
-    private $modelName;
+    protected $modelName;
 
-    private $modelClass;
+    protected $modelClass;
 
-    private $lastModifiedGetter;
+    protected $lastModifiedGetter;
 
     public function __construct($modelName, $modelClass = null, $lastModifiedGetter = null)
     {

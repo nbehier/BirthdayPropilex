@@ -23,7 +23,21 @@ var User = Backbone.Model.extend({
   },
   
   getNumber: function() {
-	  return this.get('Firstname').search(' ');
+	  var meals = this.get('Meal');
+	  if (meals != undefined && meals.length > 0) {
+		  var firstMeal = _.first(meals);
+		  return firstMeal['Meal.Number'];
+	  }
+	  return 1;
+  },
+  
+  setNumber: function(number) {
+	  var meals = this.get('Meal');
+	  if (meals != undefined && meals.length > 0) {
+		  _.each(meals, function(meal){
+			  meal['Meal.Number'] = number;
+		  });
+	  }
   },
   
   isAnswered: function() {
@@ -82,7 +96,8 @@ var User = Backbone.Model.extend({
 	  var meals = this.get('Meal');
 	  if (meals != undefined && meals.length > 0) {
 		  var firstMeal = _.first(meals);
-		  return ((firstMeal['Meal.Date'].substr(-2,2) - 12) * 3) + (firstMeal['Meal.Type'] * 1) - 1;
+		  // Find index : 3 meal by day - 2 meals for first day
+		  return ((firstMeal['Meal.Date'].substr(-2,2) - 12) * 3) + (firstMeal['Meal.Type'] * 1) - 2;
 	  }
 	  return 2;
   },

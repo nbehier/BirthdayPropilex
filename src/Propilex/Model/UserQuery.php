@@ -3,7 +3,7 @@
 namespace Propilex\Model;
 
 use Propilex\Model\om\BaseUserQuery;
-
+use \Criteria;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'user' table.
@@ -49,6 +49,22 @@ class UserQuery extends BaseUserQuery
     }
     
     /**
+     * Get all datas around user
+     * @param $userId int
+     */
+    public static function findUserByIdWithAllJoin($userId)
+    {
+        $users = self::create()
+		        ->join('Location')
+		        ->addJoin(UserPeer::ID, UsermealPeer::USER_ID, Criteria::LEFT_JOIN)
+		        ->addJoin(UsermealPeer::MEAL_ID, MealPeer::ID, Criteria::LEFT_JOIN)
+		        ->where(UserPeer::ID . ' = ?', $userId)
+		        ->find();
+        
+        return $users;
+    }
+    
+    /**
      * Prepare list of users
      * @return array
      */
@@ -60,5 +76,16 @@ class UserQuery extends BaseUserQuery
         	->toArray();
     
         return $users;
+    }
+    
+    /**
+     * Delete Meals link to a user
+     * @param int $userId
+     */
+    public static function deleteMeals($userId)
+    {
+        UsermealQuery::create()
+        	->where(UsermealPeer::USER_ID, $userId)
+        	->deleteAll();
     }
 }
