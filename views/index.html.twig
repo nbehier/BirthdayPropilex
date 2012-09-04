@@ -45,21 +45,20 @@
 	<a href="#users/<%= Id %>/close" class="action close">Fermer</a>
 	</div>
 	<span class="firstname editEnabled form-field-text" title="Prénom"><%= Firstname %></span>
-	<% if(Number > 0){ %>sont des
-	<span class="affiliation"><%= Affiliation %></span>
+	<% if(Number > 1){ %>
 	<span class="answer">
-		<% if(Answered == 1){ %><span class="answer">Ils ont confirmés</span>
-		<% }else if(Answered == 2){ %><span class="answer">Ils ne pourront venir</span>
-		<% }else{ %><span class="answer">Nous sommes en attente de réponse</span><% } %>
+		<% if(Answered == 1){ %><span class="answer">ont confirmés</span>
+		<% }else if(Answered == 2){ %><span class="answer">ne pourront venir</span>
+		<% }else{ %><span class="answer">n'ont pas encore répondu</span><% } %>
 	</span>
-	<% } else { %>est un
-	<span class="affiliation"><%= Affiliation %></span>
+	<% } else { %>
 	<span class="answer">
-		<% if(Answered == 1){ %><span class="answer">Il a confirmé</span>
-		<% }else if(Answered == 2){ %><span class="answer">Il ne pourra venir</span>
-		<% }else{ %><span class="answer">Nous sommes en attente de réponse</span><% } %>
+		<% if(Answered == 1){ %><span class="answer">a confirmé</span>
+		<% }else if(Answered == 2){ %><span class="answer">ne pourra venir</span>
+		<% }else{ %><span class="answer">n'a pas encore répondu</span><% } %>
 	</span>
 	<% } %>
+	<span class="affiliation"><% _.each(Affiliation, function(elem) { %><span class="<%= elem %>" title="<%= elem %>"></span><% }) %></span>
 	<span class="description"><%= Description %></span>
 </div>
 </script>

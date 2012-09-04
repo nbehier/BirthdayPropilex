@@ -19,7 +19,8 @@ App.Views.ShowUser = Backbone.View.extend({
 	  templateData.DisplayName = this.model.getDisplayName();
 	  templateData.Number = this.model.getNumber();
 	  templateData.IsAnswered = this.model.isAnswered();
-	  if (templateData.Affiliation == null) { templateData.Affiliation = ''; }
+	  if (templateData.Affiliation == null) { templateData.Affiliation = []; }
+	  else { templateData.Affiliation = templateData.Affiliation.split(', '); }
 	  
 	  if (this.model.get('editing') ) {
 		  var template = _.template( $("#user_edit_template").html(), templateData);

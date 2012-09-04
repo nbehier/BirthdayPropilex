@@ -22,6 +22,15 @@
 	opacity: @opacity;
 }
 
+.bgicon(@bgiconname, @bgiconsize: 16px, @bgiconleft: 0, @bgicontop: 0) {
+	background-color: transparent;
+	background-image: url('@{bgiconname}');
+	background-position: @bgiconleft @bgicontop;
+	background-repeat: no-repeat;
+	height: @bgiconsize;
+	width: @bgiconsize;
+}
+
 nav a { padding:15px 2%; }
 nav a img { .opacity(0.9); }
 nav a:hover img { .opacity(1); }
@@ -35,10 +44,16 @@ nav a:hover img { .opacity(1); }
 		&.active img,
 		&.active .userPresent { z-index:@zindexInformation + 1; }
 		a { display:block; }
-		.userPresent { background:transparent url(../img/check_white_center_16.png) 0 0 no-repeat; display:none; height:16px; left:67px; margin-top:-85px; position:relative; width:16px; z-index:@zindexInformation - 1; }
+		.userPresent { .bgicon('../img/check_white_center_16.png'); display:none; left:67px; margin-top:-85px; position:relative; z-index:@zindexInformation - 1; }
 		.answered1 .userPresent { display:block; }
 		.answered2 img { .opacity(0.6); }
 		&.active .answered2 img { .opacity(1); }
+		.affiliation span { display:block; }
+		.affiliation .Erasmus { .bgicon('../img/beer_pint_32.png', 32px); }
+		.affiliation .Lycee { .bgicon('../img/book_text_32.png', 32px); }
+		.affiliation .Polytech { .bgicon('../img/computer_32.png', 32px); }
+		.affiliation .Famille { .bgicon('../img/family_32.png', 32px); }
+		.affiliation .Tours { .bgicon('../img/castle_32.jpg', 32px); }
 	}
 	.moreInformation { background-color:rgba(255,255,255,0.95); .rounded-corners; .drop-shadow(0, 0, 10px, 0.2); min-height:200px; left:-10px; padding-left:100px; position:absolute; top:-10px; width:400px; z-index:@zindexInformation; }
 }
