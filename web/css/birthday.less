@@ -32,8 +32,13 @@ nav a:hover img { .opacity(1); }
 	li { 
 		float:left; list-style:none; margin:0 10px 10px 0; position:relative;
 		img { position:relative; z-index:@zindexInformation - 1; }
-		&.active img { z-index:@zindexInformation + 1; }
+		&.active img,
+		&.active .userPresent { z-index:@zindexInformation + 1; }
 		a { display:block; }
+		.userPresent { background:transparent url(../img/check_white_center_16.png) 0 0 no-repeat; display:none; height:16px; left:67px; margin-top:-85px; position:relative; width:16px; z-index:@zindexInformation - 1; }
+		.answered1 .userPresent { display:block; }
+		.answered2 img { .opacity(0.6); }
+		&.active .answered2 img { .opacity(1); }
 	}
 	.moreInformation { background-color:rgba(255,255,255,0.95); .rounded-corners; .drop-shadow(0, 0, 10px, 0.2); min-height:200px; left:-10px; padding-left:100px; position:absolute; top:-10px; width:400px; z-index:@zindexInformation; }
 }

@@ -2,7 +2,8 @@ App.Views.ShowUser = Backbone.View.extend({
   events: {
 	  "click .setActive": "setActive",
 	  "submit": "validateAndSave",
-	  "validated:invalid": "render"
+	  "validated:invalid": "render",
+	  "change #Answered": "changeAnsweredField"
   },
   
   tagName: "li",
@@ -144,6 +145,8 @@ App.Views.ShowUser = Backbone.View.extend({
 			.bind     ( 'range', this.changeRange )
 			.setRange (mealsMinRange, mealsMaxRange );
 		}
+		
+		this.displayLinkToAnswered($('input[name=Answered]:checked').val() );
 	},
 	
 	changeRange: function(evt, min, max) {
@@ -158,5 +161,18 @@ App.Views.ShowUser = Backbone.View.extend({
 				option.removeAttr('selected');
 			}
 		});
+	},
+	
+	changeAnsweredField: function(evt) {
+		this.displayLinkToAnswered($(evt.target).val() );
+	},
+	
+	displayLinkToAnswered: function(answeredVal) {
+		if (answeredVal == 1) {
+			$('.LinktoAnswered').show();
+		}
+		else {
+			$('.LinktoAnswered').hide();
+		}
 	}
 });

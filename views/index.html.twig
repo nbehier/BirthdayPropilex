@@ -35,8 +35,9 @@
 </script>
 
 <script type="text/template" id="user_show_template">
-<a href="#users/<%= Id %>/show" class="setActive">
+<a href="#users/<%= Id %>/show" class="setActive answered<%= Answered%>">
 	<img src="{{ app.request.basepath }}/img/users/photo_<%= Id %>.jpg" alt="Photo de <%= DisplayName %>"/>
+	<span class="userPresent"></span>
 </a>
 <div class="moreInformation show" style="display:<% print(active ? 'block' : 'none') %>;">
 	<div class="actions">
@@ -70,7 +71,7 @@
 	<div class="formElement"><label for="Firstname">Prénom</label><input type="text" name="Firstname" value="<%= Firstname %>"/></div>
 	<div class="formElement"><label for="Affiliation">Affiliation</label><input type="text" name="Affiliation" value="<%= Affiliation %>"/></div>
 	<div class="formElement"><label for="Answered">Présence</label>
-	<div class="verticalAlign">
+	<div class="verticalAlign" id="Answered">
 	<label class="radio"><input type="radio" name="Answered" value="0" <% if (Answered == 0){ %>checked="checked"<% } %>/> En attente de réponse</label>
 	<label class="radio"><input type="radio" name="Answered" value="1" <% if (Answered == 1){ %>checked="checked"<% } %>/> Présent</label>
 	<label class="radio"><input type="radio" name="Answered" value="2" <% if (Answered == 2){ %>checked="checked"<% } %>/> Absent</label>
@@ -79,7 +80,7 @@
 	<label for="Description">Description</label>
 	<textarea name="Description"><%= Description %></textarea>
 	</div>
-	<div class="formElement" style="height:4em; overflow:hidden;">
+	<div class="formElement LinktoAnswered" style="height:4em; overflow:hidden;">
 	<label for="Meal">Repas</label>
 	<select id="Meal" name="Meal[]" multiple="multiple">
 		<option value="212">Ven soir</option>
@@ -91,7 +92,7 @@
 		<option value="214">Dim soir</option>
 	</select>
 	</div>
-	<div class="formElement"><label for="Number">Personne(s)</label><input type="text" name="Number" value="<%= Number %>"/></div>
+	<div class="formElement LinktoAnswered"><label for="Number">Personne(s)</label><input type="text" name="Number" value="<%= Number %>"/></div>
 	<div class="actions"><input type="submit" value="Sauvegarder"><a href="#users/<%= Id %>/show" class="action undo">Annuler</a><img src="{{ app.request.basepath }}/img/ajax-loader.gif" alt="Indicateur requête en cours" style="display:none" id="userEditAjaxIndicator"/></div>
 	</form>
 </div>
