@@ -60,7 +60,30 @@ $app->before(function (Request $request) use ($app) {
  */
 $app->get('/', function() use ($app) {
     $users = Propilex\Model\UserQuery::selectUsers();
-    return $app['twig']->render('index.html.twig', array('users' => json_encode($users) ) );
+    $locations = array(
+    	array('key' => 1, 'label' => 'Tente'),
+    	array('key' => 2, 'label' => 'Chambre')
+    );
+    $meals = array(
+    	array('key' => '212', 'label' => 'Ven soir'), 
+    	array('key' => '013', 'label' => 'Sam matin'), 
+    	array('key' => '113', 'label' => 'Sam midi'), 
+    	array('key' => '213', 'label' => 'Sam soir'), 
+    	array('key' => '014', 'label' => 'Dim matin'), 
+    	array('key' => '114', 'label' => 'Dim midi'), 
+    	array('key' => '214', 'label' => 'Dim soir')
+    );
+    $answers = array(
+    	array('key' => 0, 'label' => 'En attente de réponse'),
+    	array('key' => 1, 'label' => 'Présent'),
+    	array('key' => 2, 'label' => 'Absent')
+    );
+    return $app['twig']->render('index.html.twig', array(
+    	'users' => json_encode($users),
+    	'locations' => json_encode($locations),
+    	'meals' => json_encode($meals),
+    	'answers' => json_encode($answers)
+    ));
 });
 
 

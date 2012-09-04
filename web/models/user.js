@@ -22,6 +22,10 @@ var User = Backbone.Model.extend({
 	  return this.get('Firstname') + ' ' + this.get('Lastname');
   },
   
+  getLocationTitle: function() {
+	  return this.get('Location.Title');
+  },
+  
   getNumber: function() {
 	  var meals = this.get('Meal');
 	  if (meals != undefined && meals.length > 0) {

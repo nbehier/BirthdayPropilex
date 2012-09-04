@@ -30,6 +30,10 @@
         App.users = new App.Collections.Users;
         App.users.reset({{ users | raw }});
 
+		App.locations = {{ locations | raw }};
+		App.meals = {{ meals | raw }};
+		App.answers = {{ answers | raw }};
+        
         App.init();
     });
 </script>
@@ -59,6 +63,9 @@
 	</span>
 	<% } %>
 	<span class="affiliation"><% _.each(Affiliation, function(elem) { %><span class="<%= elem %>" title="<%= elem %>"></span><% }) %></span>
+	<% if(LocationId){ %>
+	<span class="location"><img src="{{ app.request.basepath }}/img/<% if(LocationId == 1){ %>camping_noun_project_1116.svg<% } else if(LocationId == 2){ %>roof_noun_project_563.svg<% } %>" title="<%= LocationTitle %>" width="32" height="32"/></span>
+	<% } %>
 	<span class="description"><%= Description %></span>
 </div>
 </script>
@@ -71,9 +78,9 @@
 	<div class="formElement"><label for="Affiliation">Affiliation</label><input type="text" name="Affiliation" value="<%= Affiliation %>"/></div>
 	<div class="formElement"><label for="Answered">Présence</label>
 	<div class="verticalAlign" id="Answered">
-	<label class="radio"><input type="radio" name="Answered" value="0" <% if (Answered == 0){ %>checked="checked"<% } %>/> En attente de réponse</label>
-	<label class="radio"><input type="radio" name="Answered" value="1" <% if (Answered == 1){ %>checked="checked"<% } %>/> Présent</label>
-	<label class="radio"><input type="radio" name="Answered" value="2" <% if (Answered == 2){ %>checked="checked"<% } %>/> Absent</label>
+	<% _.each(App.answers, function(anAnswer) { %>
+		<label class="radio"><input type="radio" name="Answered" value="<%= anAnswer.key %>" <% if (Answered == anAnswer.key){ %>checked="checked"<% } %>/> <%= anAnswer.label %></label>
+	<% }); %>
 	</div></div>
 	<div class="formElement">
 	<label for="Description">Description</label>
@@ -82,16 +89,21 @@
 	<div class="formElement LinktoAnswered" style="height:4em; overflow:hidden;">
 	<label for="Meal">Repas</label>
 	<select id="Meal" name="Meal[]" multiple="multiple">
-		<option value="212">Ven soir</option>
-		<option value="013">Sam matin</option>
-		<option value="113">Sam midi</option>
-		<option value="213">Sam soir</option>
-		<option value="014">Dim matin</option>
-		<option value="114">Dim midi</option>
-		<option value="214">Dim soir</option>
+		<% _.each(App.meals, function(aMeal) { %>
+		<option value="<%= aMeal.key %>"><%= aMeal.label %></option>
+		<% }); %>
 	</select>
 	</div>
 	<div class="formElement LinktoAnswered"><label for="Number">Personne(s)</label><input type="text" name="Number" value="<%= Number %>"/></div>
+	<div class="formElement LinktoAnswered">
+		<label for="LocationId">Couchage</label>
+		<select id="LocationId" name="LocationId">
+			<option value="">?</option>
+			<% _.each(App.locations, function(aLocation) { %>
+			<option value="<%= aLocation.key %>" <% if (LocationId == aLocation.key){ %>selected="selected"<% } %>><%= aLocation.label %></option>
+			<% }); %>
+		</select>
+	</div>
 	<div class="actions"><input type="submit" value="Sauvegarder"><a href="#users/<%= Id %>/show" class="action undo">Annuler</a><img src="{{ app.request.basepath }}/img/ajax-loader.gif" alt="Indicateur requête en cours" style="display:none" id="userEditAjaxIndicator"/></div>
 	</form>
 </div>
