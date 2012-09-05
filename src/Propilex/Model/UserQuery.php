@@ -25,7 +25,7 @@ class UserQuery extends BaseUserQuery
     public static function selectUsers()
     {
         $users = self::create()
-    			->join('Location')
+    			->leftJoinLocation('Location')
     			->select(array('Id', 'Firstname', 'Lastname', 'Affiliation', 'Description', 'Answered', 'LocationId', 'Location.Title'))
     			->find()
         		->toArray();

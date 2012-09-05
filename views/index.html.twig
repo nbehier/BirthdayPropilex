@@ -63,7 +63,7 @@
 	</span>
 	<% } %>
 	<span class="affiliation"><% _.each(Affiliation, function(elem) { %><span class="<%= elem %>" title="<%= elem %>"></span><% }) %></span>
-	<% if(LocationId){ %>
+	<% if(LocationId > 0){ %>
 	<span class="location"><img src="{{ app.request.basepath }}/img/<% if(LocationId == 1){ %>camping_noun_project_1116.svg<% } else if(LocationId == 2){ %>roof_noun_project_563.svg<% } %>" title="<%= LocationTitle %>" width="32" height="32"/></span>
 	<% } %>
 	<span class="description"><%= Description %></span>
