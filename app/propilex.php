@@ -105,9 +105,20 @@ $app->mount('/users', new Propilex\Provider\UserController(
 /**
  * Get users activities
  */
-$app->get('/activities', function() use ($app) {
+$app->get('/list-activities', function() use ($app) {
     $activities = Propilex\LogReader::getActivities($app);
-    return $app['twig']->render('activities.html.twig', array('activities' => $activities) );
+    return $app['twig']->render('activities.html.twig', array(
+        'activities' => $activities
+    ));
+});
+
+/**
+ * Get users activities
+ */
+$app->get('/list-users', function () use($app )
+{
+    $users = Propilex\Model\UserQuery::selectUsersListOrderByConfirmation();
+    return $app['twig']->render('list-users.html.twig', array('users' => $users) );
 });
 
 return $app;

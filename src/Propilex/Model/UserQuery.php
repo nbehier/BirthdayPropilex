@@ -55,7 +55,7 @@ class UserQuery extends BaseUserQuery
     public static function findUserByIdWithAllJoin($userId)
     {
         $users = self::create()
-		        ->join('Location')
+		        ->leftJoinLocation('Location')
 		        ->addJoin(UserPeer::ID, UsermealPeer::USER_ID, Criteria::LEFT_JOIN)
 		        ->addJoin(UsermealPeer::MEAL_ID, MealPeer::ID, Criteria::LEFT_JOIN)
 		        ->where(UserPeer::ID . ' = ?', $userId)
@@ -71,9 +71,25 @@ class UserQuery extends BaseUserQuery
     public static function selectUsersList()
     {
         $users = self::create()
-	        ->select(array('Id', 'Firstname'))
+	        ->select(array(UserPeer::ID, UserPeer::FIRSTNAME))
         	->find()
         	->toArray();
+    
+        return $users;
+    }
+    
+
+    /**
+     * Prepare list of users
+     * @return array
+     */
+    public static function selectUsersListOrderByConfirmation()
+    {
+        $users = self::create()
+	        //->select(array(UserPeer::ID, UserPeer::FIRSTNAME, ))
+        	->orderBy(UserPeer::ANSWERED)
+	        ->find()
+	        ->toArray();
     
         return $users;
     }

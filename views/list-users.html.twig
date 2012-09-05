@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<article>
+    <section>
+        <h2>Confirmation</h2>
+	    <div id="listUsers">
+	    {% set category = '' %}
+        {% for user in users %}
+        	{%  if category != user.Answered %}
+        		{% if category != '' %}</ul>{% endif %}
+        		{%  set category = user.Answered %}
+        	<h3>{{ category }}</h3>
+        	<ul class="dataTable">
+        	{% endif %}
+	        	<li><span class="number"></span> {{ user.Firstname }}</li>
+        {% endfor %}
+        	</ul>
+        </div>
+    </section>
+</article>
+
+<aside>
+    <div id="notice"></div>
+</aside>
+{% endblock %}
