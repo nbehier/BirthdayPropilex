@@ -107,6 +107,7 @@ class UserController extends RestController
             
             // Update Meals relations
             $object->deleteMeals();
+            
             $mealsRef = array();
             foreach($params['Meal'] as $mealRef) {
                 $mealType = substr($mealRef, 0, 1);

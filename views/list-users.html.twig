@@ -13,7 +13,7 @@
         	<h3>{{ category }}</h3>
         	<ul class="dataTable">
         	{% endif %}
-	        	<li><span class="number"></span> {{ user.Firstname }}</li>
+	        	<li><a href="/#users/{{ user.Id }}/show"><span class="number">{{ user.Number }}</span> {{ user.Firstname }}</a></li>
         {% endfor %}
         	</ul>
         </div>

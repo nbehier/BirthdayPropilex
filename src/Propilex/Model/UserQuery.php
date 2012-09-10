@@ -4,6 +4,7 @@ namespace Propilex\Model;
 
 use Propilex\Model\om\BaseUserQuery;
 use \Criteria;
+use \BasePeer;
 
 /**
  * Skeleton subclass for performing query and update operations on the 'user' table.
@@ -85,12 +86,22 @@ class UserQuery extends BaseUserQuery
      */
     public static function selectUsersListOrderByConfirmation()
     {
+        $sqlKeys = UserPeer::getFieldNames(BasePeer::TYPE_PHPNAME);
+
         $users = self::create()
-	        //->select(array(UserPeer::ID, UserPeer::FIRSTNAME, ))
+	        ->select($sqlKeys )
+	        ->addAsColumn('Number', UsermealPeer::NUMBER)
+		    ->addJoin(UserPeer::ID, UsermealPeer::USER_ID, Criteria::LEFT_JOIN)
+	        ->groupBy(UserPeer::ID)
         	->orderBy(UserPeer::ANSWERED)
 	        ->find()
 	        ->toArray();
-    
+        
+        // On convertit les ENUMs
+        foreach ($users as $k => $user) {
+            $users[$k]['Answered'] = User::getAnsweredValue($users[$k]['Answered'] );
+        }
+        
         return $users;
     }
     
@@ -101,7 +112,7 @@ class UserQuery extends BaseUserQuery
     public static function deleteMeals($userId)
     {
         UsermealQuery::create()
-        	->where(UsermealPeer::USER_ID, $userId)
-        	->deleteAll();
+        	->where(UsermealPeer::USER_ID . " = ?", $userId)
+        	->delete();
     }
 }
